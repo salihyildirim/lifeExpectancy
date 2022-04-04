@@ -8,6 +8,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.dark().copyWith(
+        primaryColor: Colors.lightGreen,
+        // primarySwatch: Colors.orange,
+        brightness: Brightness.dark,
+        //scaffoldBackgroundColor: Colors.lightBlueAccent
+      ),
       home: InputPage(),
     );
   }
@@ -32,9 +38,14 @@ class _InputPageState extends State<InputPage> {
       body: Center(
         child: Text('Form Alanı'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
+      floatingActionButton: Theme(
+        data: ThemeData(
+            colorScheme: ColorScheme.fromSwatch()
+                .copyWith(secondary: Theme.of(context).primaryColor)),
+        child: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add),
+        ),
       ),
     );
   }
