@@ -1,4 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'IconCinsiyet.dart';
+import 'my_container.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -6,6 +11,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  String seciliCinsiyet = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,33 +45,36 @@ class _InputPageState extends State<InputPage> {
           child: Row(
             children: [
               Expanded(
-                child: MyContainer(),
+                child: MyContainer(
+                  onPress: () {
+                    setState(() {
+                      seciliCinsiyet = 'KADIN';
+                    });
+                  },
+                  renk: seciliCinsiyet == 'KADIN'
+                      ? Colors.purple[100]
+                      : Colors.white54,
+                  child:
+                      KadinErkek(simge: FontAwesomeIcons.venus, text: "KADIN"),
+                ),
               ),
               Expanded(
-                child: MyContainer(),
+                child: MyContainer(
+                  onPress: () {
+                    setState(() {
+                      seciliCinsiyet = 'ERKEK';
+                    });
+                  },
+                  renk:
+                      seciliCinsiyet == 'ERKEK' ? Colors.blue : Colors.white54,
+                  child:
+                      KadinErkek(simge: FontAwesomeIcons.mars, text: "ERKEK"),
+                ),
               ),
             ],
           ),
         ),
       ]),
-    );
-  }
-}
-
-class MyContainer extends StatelessWidget {
-  final Color renk;
-  var child;
-  MyContainer({this.renk = Colors.white54, this.child /*required this.renk*/});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: child,
-      margin: EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: renk,
-      ),
     );
   }
 }
