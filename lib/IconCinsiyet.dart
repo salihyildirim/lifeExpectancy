@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yasambeklentisi/constants.dart';
 
 class KadinErkek extends StatelessWidget {
   final IconData? simge;
@@ -18,8 +19,7 @@ class KadinErkek extends StatelessWidget {
         SizedBox(height: 10),
         Text(
           text!,
-          style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black54),
+          style: kMetinStili,
         )
       ],
     );

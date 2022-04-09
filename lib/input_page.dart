@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:yasambeklentisi/constants.dart';
 
 import 'IconCinsiyet.dart';
 import 'my_container.dart';
@@ -12,6 +13,9 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   String seciliCinsiyet = '';
+  double icilenSigara = 20.0;
+  double sporGunu = 3.0;
+  int boy = 170;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,12 +26,67 @@ class _InputPageState extends State<InputPage> {
         ),
         centerTitle: true,
       ),
-      body: Column(children: [
+      body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Expanded(
           child: Row(
             children: [
               Expanded(
-                child: MyContainer(),
+                child: MyContainer(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RotatedBox(
+                          quarterTurns: -1,
+                          child: Text(
+                            'BOY',
+                            style: kMetinStili,
+                          )),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      RotatedBox(
+                          quarterTurns: -1,
+                          child: Text(
+                            boy.toString(),
+                            style: kSayiStili,
+                          )),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ButtonTheme(
+                            minWidth: 36,
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                side: BorderSide(
+                                    width: 3, color: Colors.lightBlue),
+                              ),
+                              onPressed: () => print(''),
+                              child: Icon(
+                                FontAwesomeIcons.plus,
+                                size: 10,
+                              ),
+                            ),
+                          ),
+                          OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                                side: BorderSide(
+                                    width: 3, color: Colors.lightBlue)),
+                            onPressed: () {
+                              print('');
+                            },
+                            child: Icon(
+                              FontAwesomeIcons.minus,
+                              size: 10,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               ),
               Expanded(
                 child: MyContainer(),
@@ -36,10 +95,57 @@ class _InputPageState extends State<InputPage> {
           ),
         ),
         Expanded(
-          child: MyContainer(),
+          child: MyContainer(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Haftada Kaç Gün Spor Yapıyorsunuz?',
+                  textAlign: TextAlign.center, style: kMetinStili),
+              Text(
+                  sporGunu
+                      .toInt()
+                      .toString(), //'${icilenSigara.round()}' round -> yuvarlama
+                  textAlign: TextAlign.center,
+                  style: kSayiStili),
+              Slider(
+                min: 0,
+                max: 7,
+                value: sporGunu,
+                divisions: 7,
+                onChanged: (double newValue) {
+                  setState(() {
+                    sporGunu = newValue;
+                  });
+                },
+              )
+            ],
+          )),
         ),
         Expanded(
-          child: MyContainer(),
+          child: MyContainer(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Günde Kaç Sigara İçiyorsunuz?',
+                  textAlign: TextAlign.center, style: kMetinStili),
+              Text(
+                  icilenSigara
+                      .toInt()
+                      .toString(), //'${icilenSigara.round()}' round -> yuvarlama
+                  textAlign: TextAlign.center,
+                  style: kSayiStili),
+              Slider(
+                min: 0,
+                max: 40,
+                value: icilenSigara,
+                onChanged: (double newValue) {
+                  setState(() {
+                    icilenSigara = newValue;
+                  });
+                },
+              )
+            ],
+          )),
         ),
         Expanded(
           child: Row(
