@@ -16,6 +16,7 @@ class _InputPageState extends State<InputPage> {
   double icilenSigara = 20.0;
   double sporGunu = 3.0;
   int boy = 170;
+  int kilo = 60;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,64 +33,13 @@ class _InputPageState extends State<InputPage> {
             children: [
               Expanded(
                 child: MyContainer(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RotatedBox(
-                          quarterTurns: -1,
-                          child: Text(
-                            'BOY',
-                            style: kMetinStili,
-                          )),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      RotatedBox(
-                          quarterTurns: -1,
-                          child: Text(
-                            boy.toString(),
-                            style: kSayiStili,
-                          )),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ButtonTheme(
-                            minWidth: 36,
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                side: BorderSide(
-                                    width: 3, color: Colors.lightBlue),
-                              ),
-                              onPressed: () => print(''),
-                              child: Icon(
-                                FontAwesomeIcons.plus,
-                                size: 10,
-                              ),
-                            ),
-                          ),
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                                side: BorderSide(
-                                    width: 3, color: Colors.lightBlue)),
-                            onPressed: () {
-                              print('');
-                            },
-                            child: Icon(
-                              FontAwesomeIcons.minus,
-                              size: 10,
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                  child: buildRowOutlinedButton('BOY'),
                 ),
               ),
               Expanded(
-                child: MyContainer(),
+                child: MyContainer(
+                  child: buildRowOutlinedButton('KİLO'),
+                ),
               ),
             ],
           ),
@@ -181,6 +131,75 @@ class _InputPageState extends State<InputPage> {
           ),
         ),
       ]),
+    );
+  }
+
+  Row buildRowOutlinedButton(String label) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        RotatedBox(
+            quarterTurns: -1,
+            child: Text(
+              label,
+              style: kMetinStili,
+            )),
+        SizedBox(
+          width: 8,
+        ),
+        RotatedBox(
+            quarterTurns: -1,
+            child: Text(
+              boy.toString(),
+              style: kSayiStili,
+            )),
+        SizedBox(
+          width: 8,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ButtonTheme(
+              minWidth: 36,
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(width: 3, color: Colors.lightBlue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    if (label == 'BOY') {
+                      boy++;
+                    } else {
+                      kilo++;
+                    }
+                  });
+                },
+                child: Icon(
+                  FontAwesomeIcons.plus,
+                  size: 10,
+                ),
+              ),
+            ),
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  side: BorderSide(width: 3, color: Colors.lightBlue)),
+              onPressed: () {
+                setState(() {
+                  if (label == 'BOY') {
+                    boy--;
+                  } else {
+                    kilo--;
+                  }
+                });
+              },
+              child: Icon(
+                FontAwesomeIcons.minus,
+                size: 10,
+              ),
+            )
+          ],
+        )
+      ],
     );
   }
 }
