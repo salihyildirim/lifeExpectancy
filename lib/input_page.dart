@@ -17,6 +17,7 @@ class _InputPageState extends State<InputPage> {
   double sporGunu = 3.0;
   int boy = 170;
   int kilo = 60;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,10 +52,8 @@ class _InputPageState extends State<InputPage> {
             children: [
               Text('Haftada Kaç Gün Spor Yapıyorsunuz?',
                   textAlign: TextAlign.center, style: kMetinStili),
-              Text(
-                  sporGunu
-                      .toInt()
-                      .toString(), //'${icilenSigara.round()}' round -> yuvarlama
+              Text(sporGunu.toInt().toString(),
+                  //'${icilenSigara.round()}' round -> yuvarlama
                   textAlign: TextAlign.center,
                   style: kSayiStili),
               Slider(
@@ -78,10 +77,8 @@ class _InputPageState extends State<InputPage> {
             children: [
               Text('Günde Kaç Sigara İçiyorsunuz?',
                   textAlign: TextAlign.center, style: kMetinStili),
-              Text(
-                  icilenSigara
-                      .toInt()
-                      .toString(), //'${icilenSigara.round()}' round -> yuvarlama
+              Text(icilenSigara.toInt().toString(),
+                  //'${icilenSigara.round()}' round -> yuvarlama
                   textAlign: TextAlign.center,
                   style: kSayiStili),
               Slider(
@@ -130,6 +127,13 @@ class _InputPageState extends State<InputPage> {
             ],
           ),
         ),
+        ButtonTheme(
+          height: 50,
+          child: MaterialButton(
+              onPressed: () {},
+              child: Text('HESAPLA', style: kMetinStili),
+              color: Colors.white54),
+        )
       ]),
     );
   }
@@ -150,8 +154,8 @@ class _InputPageState extends State<InputPage> {
         RotatedBox(
             quarterTurns: -1,
             child: Text(
-              boy.toString(),
-              style: kSayiStili,
+              label == 'BOY' ? boy.toString() : kilo.toString(),
+              style: kMetinStili,
             )),
         SizedBox(
           width: 8,
@@ -169,7 +173,7 @@ class _InputPageState extends State<InputPage> {
                   setState(() {
                     if (label == 'BOY') {
                       boy++;
-                    } else {
+                    } else if (label == 'KİLO') {
                       kilo++;
                     }
                   });
@@ -187,7 +191,7 @@ class _InputPageState extends State<InputPage> {
                 setState(() {
                   if (label == 'BOY') {
                     boy--;
-                  } else {
+                  } else if (label == 'KİLO') {
                     kilo--;
                   }
                 });
