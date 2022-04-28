@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yasambeklentisi/constants.dart';
+import 'package:yasambeklentisi/result_page.dart';
+import 'package:yasambeklentisi/user_data.dart';
 
 import 'IconCinsiyet.dart';
 import 'my_container.dart';
@@ -13,7 +15,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   String seciliCinsiyet = '';
-  double icilenSigara = 20.0;
+  double icilenSigara = 15.0;
   double sporGunu = 3.0;
   int boy = 170;
   int kilo = 60;
@@ -130,7 +132,18 @@ class _InputPageState extends State<InputPage> {
         ButtonTheme(
           height: 50,
           child: MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ResultPage(UserData(
+                              icilenSigara: icilenSigara,
+                              sporGunu: sporGunu,
+                              seciliCinsiyet: seciliCinsiyet,
+                              boy: boy,
+                              kilo: kilo,
+                            ))));
+              },
               child: Text('HESAPLA', style: kMetinStili),
               color: Colors.white54),
         )
