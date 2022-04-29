@@ -7,8 +7,8 @@ class Hesap {
   double hesapla() {
     double sonuc;
     sonuc = 85 - (_userData.icilenSigara) + (_userData.sporGunu);
-    int boy = _userData.boy ^ 2;
-    double vkindeksi = _userData.kilo / boy;
+    double boy = ((_userData.boy ^ 2) / 100);
+    double vkindeksi = (_userData.kilo) / boy;
 
     if (vkindeksi <= 18) {
       sonuc += -3;
@@ -19,7 +19,7 @@ class Hesap {
     } else if (vkindeksi > 30 && vkindeksi <= 40) {
       sonuc -= 6;
     } else if (vkindeksi > 40) {
-      sonuc -= 6 + (_userData.kilo / 10);
+      sonuc -= (8 + (vkindeksi / 10));
     }
 
     if (_userData.seciliCinsiyet == "KADIN") {
